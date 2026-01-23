@@ -66,50 +66,55 @@ interface InputTextProps
   size?: "sm" | "md" | "lg";
 }
 
-export default function InputText({
-  label,
-  error,
-  helperText,
-  required,
-  size = "md",
-  className,
-  disabled,
-  id,
-  ...props
-}: InputTextProps) {
-  const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
-  const variant = error ? "error" : "default";
+const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
+  (
+    {
+      label,
+      error,
+      helperText,
+      required,
+      size = "md",
+      className,
+      disabled,
+      id,
+      ...props
+    },
+    ref
+  ) => {
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    const variant = error ? "error" : "default";
 
-  return (
-    <div className="flex flex-col w-full">
-      {label && (
-        <label
-          htmlFor={inputId}
-          className={labelVariants({ variant, required })}
-        >
-          {label}
-        </label>
-      )}
+    return (
+      <div className="flex flex-col w-full">
+        {label && (
+          <label
+            htmlFor={inputId}
+            className={labelVariants({ variant, required })}
+          >
+            {label}
+          </label>
+        )}
 
-      <input
-        id={inputId}
-        disabled={disabled}
-        className={inputVariants({ 
-          variant, 
-          size, 
-          disabled: disabled || false,
-          className 
-        })}
-        aria-invalid={!!error}
-        aria-describedby={
-          error 
-            ? `${inputId}-error` 
-            : helperText 
-            ? `${inputId}-helper` 
-            : undefined
-        }
-        {...props}
-      />
+        <input
+          ref={ref}
+          id={inputId}
+          disabled={disabled}
+          className={inputVariants({ 
+            variant, 
+            size, 
+            disabled: disabled || false,
+            className 
+          })}
+          aria-invalid={!!error}
+          aria-describedby={
+            error 
+              ? `${inputId}-error` 
+              : helperText 
+              ? `${inputId}-helper` 
+              : undefined
+          }
+          {...props}
+        />
 
       {error && (
         <span
@@ -130,6 +135,11 @@ export default function InputText({
           {helperText}
         </span>
       )}
-    </div>
-  );
-}
+      </div>
+    );
+  }
+);
+
+InputText.displayName = "InputText";
+
+export default InputText;
