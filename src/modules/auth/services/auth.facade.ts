@@ -34,6 +34,7 @@ class AuthFacade {
     this.setLoading(true);
 
     try {
+      authService.logout(); // Limpa estado anterior
       const { user } = await authService.login(credentials);
 
       this.authStateSubject.next({
@@ -64,6 +65,7 @@ class AuthFacade {
       this.authStateSubject.next({
         ...this.currentState,
         isAuthenticated: true,
+        user: authService.getUser()
       });
     } catch (error) {
       this.logout();
@@ -84,7 +86,7 @@ class AuthFacade {
 
   // Verificar autenticação inicial
   checkAuth(): void {
-    const isAuthenticated = authService.hasValidToken();
+    const isAuthenticated = authService.isAuthenticated();
     const user = authService.getUser();
 
     this.authStateSubject.next({

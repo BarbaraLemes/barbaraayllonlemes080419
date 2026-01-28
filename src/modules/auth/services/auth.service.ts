@@ -30,12 +30,18 @@ class AuthService {
     const refreshToken = this.getRefreshToken();
 
     if (!refreshToken) {
-      throw new Error("No refresh token available");
+      throw new Error("Sem refresh token disponível");
     }
 
-    const response = await api.put<LoginResponse>("/autenticacao/refresh", {
-      refreshToken,
-    });
+    const response = await api.put<LoginResponse>(
+      "/autenticacao/refresh",
+      {}, // body vazio
+      {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      },
+    );
 
     return this.saveTokens(response.data);
   }
@@ -103,6 +109,10 @@ class AuthService {
     }
 
     return Date.now() < parseInt(refreshExpiresAt);
+  }
+
+  isAuthenticated(): boolean {
+    return this.hasValidToken() || this.canRefresh();
   }
 }
 

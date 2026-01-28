@@ -29,6 +29,12 @@ export const registerAuthCallbacks = (callbacks: {
 
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const isAuthRoute = config.url?.includes("/autenticacao/login") 
+      || config.url?.includes("/autenticacao/refresh");
+    
+    if (isAuthRoute) {
+      return config;
+    }
     const token = getAccessToken?.();
 
     if (token && config.headers) {
@@ -53,8 +59,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry && !isAuthRoute) {
       originalRequest._retry = true;
 
-      try {
         if (canRefreshToken?.()) {
+          try {
           await handleTokenRefresh?.();
 
           const newToken = getAccessToken?.();
@@ -63,15 +69,16 @@ api.interceptors.response.use(
           }
           return api(originalRequest);
 
+          } catch (refreshError) {
+          handleLogout?.();
+          return Promise.reject(refreshError);
+          }
+
         } else {
           handleLogout?.();
-          window.location.href = "/login";
+          return Promise.reject(new Error("Seção expirada"));
         }
-      } catch (refreshError) {
-        handleLogout?.();
-        window.location.href = "/login";
-        return Promise.reject(refreshError);
-      }
+      
     }
 
     return Promise.reject(error);
