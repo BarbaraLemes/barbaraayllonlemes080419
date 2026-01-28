@@ -38,7 +38,7 @@ export default function Login() {
   
 
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
         <Card padding="lg" className="w-full max-w-md border-none shadow-lg">
           <div className="text-center mb-8">
             <Text as="h1" variant="heading-2xl" className="text-slate-800">
