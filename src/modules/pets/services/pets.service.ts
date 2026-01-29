@@ -1,5 +1,5 @@
 import { api } from "../../auth/services/api";
-import type { PetsResponse, PetsQueryParams, Pet, PetRequest, PetDetail } from "../types/pets.types";
+import type { PetsResponse, PetsQueryParams, Pet, PetRequest, PetDetail, PetFoto } from "../types/pets.types";
 
 class PetsService {
   private readonly BASE_PATH = "/v1/pets";
@@ -23,17 +23,34 @@ class PetsService {
   }
 
   async createPet(data: PetRequest): Promise<Pet> {
-    const response = await api.post(this.BASE_PATH, data);
+    const response = await api.post<Pet>(this.BASE_PATH, data);
     return response.data;
   }
 
   async updatePet(id: number, data: PetRequest): Promise<Pet> {
-    const response = await api.put(`${this.BASE_PATH}/${id}`, data);
+    const response = await api.put<Pet>(`${this.BASE_PATH}/${id}`, data);
     return response.data;
   }
 
   async deletePet(id: number): Promise<void> {
-    await api.delete(`${this.BASE_PATH}/${id}`);
+    await api.delete<void>(`${this.BASE_PATH}/${id}`);
+  }
+
+  async uploadFotoPet(id: number, foto: File) {
+    const formData = new FormData();
+    formData.append("foto", foto);
+
+    const response = await api.post<PetFoto>(`${this.BASE_PATH}/${id}/fotos`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  }
+
+  async deleteFotoPet(id: number, fotoId: number): Promise<void> {
+    await api.delete<void>(`${this.BASE_PATH}/${id}/fotos/${fotoId}`);
   }
 }
 
