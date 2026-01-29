@@ -4,7 +4,7 @@ import type { CreateTutorRequest, Tutor, TutorDetail, TutorFoto, TutorQueryParam
 class TutoresService {
   private readonly BASE_URL = "/v1/tutores";
 
-  async listarTutores(params?: TutorQueryParams): Promise<TutoresResponse> {
+  async getTutores(params?: TutorQueryParams): Promise<TutoresResponse> {
     const response = await api.get<TutoresResponse>(`${this.BASE_URL}`, {
       params: {
         nome: params?.nome,
@@ -20,12 +20,12 @@ class TutoresService {
     return response.data;
   }
 
-  async novoTutor(data: CreateTutorRequest): Promise<Tutor> {
+  async createTutor(data: CreateTutorRequest): Promise<Tutor> {
     const response = await api.post<Tutor>(`${this.BASE_URL}`, data);
     return response.data;
   }
 
-  async editarTutor(id: number, data: Partial<CreateTutorRequest>): Promise<Tutor> {
+  async updateTutor(id: number, data: Partial<CreateTutorRequest>): Promise<Tutor> {
     const response = await api.put<Tutor>(`${this.BASE_URL}/${id}`, data);
     return response.data;
   }
