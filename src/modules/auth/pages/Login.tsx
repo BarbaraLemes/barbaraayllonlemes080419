@@ -39,8 +39,11 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-        <Card padding="lg" className="w-full max-w-md border-none shadow-lg">
+        <Card variant="default" padding="lg" className="w-full max-w-md border-none shadow-xl">
           <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <img src="/iconPata.svg" alt="Pata" className="h-16" />
+            </div>
             <Text as="h1" variant="heading-2xl" className="text-slate-800">
               Sistema de Gestão de Pets
             </Text>
