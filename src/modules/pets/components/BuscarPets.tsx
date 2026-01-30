@@ -32,7 +32,7 @@ export default function BuscarPets({ onSearch }: BuscarPetsProps) {
   };
 
   return (
-    <div className="flex gap-4 items-center mb-6">
+    <div className="flex gap-4 items-center">
       <div className="flex-1 relative">
         <i className="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10" />
         <InputText
@@ -40,13 +40,13 @@ export default function BuscarPets({ onSearch }: BuscarPetsProps) {
           value={searchTerm}
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
-          className="pl-10 h-12"
+          className="pl-10 h-11"
         />
       </div>
       <Button 
         variant="primary"
         onClick={handleSearchClick}
-        className="px-6 h-12"
+        className="px-6 h-11"
       >
         <i className="pi pi-search mr-2" />
         Buscar
