@@ -8,6 +8,9 @@ const Login = lazy(() => import("../modules/auth/pages/Login"));
 const PetList = lazy(() => import("../modules/pets/pages/PetList"));
 const PetDetail = lazy(() => import("../modules/pets/pages/PetDetail"));
 const PetForm = lazy(() => import("../modules/pets/pages/PetForm"));
+const TutorList = lazy(() => import("../modules/tutores/pages/TutorList"));
+const TutorDetail = lazy(() => import("../modules/tutores/pages/TutorDetail"));
+const TutorForm = lazy(() => import("../modules/tutores/pages/TutorForm"));
 
 // Loading component
 const LoadingFallback = () => (
@@ -62,6 +65,38 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <PetForm />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tutores",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TutorList />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tutores/novo",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TutorForm />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tutores/:id",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TutorDetail />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tutores/:id/editar",
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TutorForm />
           </Suspense>
         ),
       },
