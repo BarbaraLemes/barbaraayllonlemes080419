@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
+import { Tooltip } from "primereact/tooltip";
 
 export const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
@@ -32,6 +33,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Var
   loadingText?: string;
   icon?: string;
   iconPos?: "left" | "right";
+  tooltip?: string;
+  tooltipOptions?: {
+    position?: "top" | "bottom" | "left" | "right";
+    className?: string;
+  };
 }
 
 export default function Button({
@@ -42,18 +48,31 @@ export default function Button({
   loadingText = "Carregando...",
   icon,
   iconPos = "left",
+  tooltip,
+  tooltipOptions,
   className,
   disabled,
   ...props
 }: ButtonProps) {
   const iconElement = icon && <i className={`pi ${icon}`} />;
+  const buttonId = React.useId();
 
   return (
-    <button
-      className={buttonVariants({ variant, size, className })}
-      disabled={disabled || isLoading}
-      {...props}
-    >
+    <>
+      {tooltip && (
+        <Tooltip 
+          target={`#${buttonId}`}
+          content={tooltip}
+          position={tooltipOptions?.position || "top"}
+          className={tooltipOptions?.className}
+        />
+      )}
+      <button
+        id={buttonId}
+        className={buttonVariants({ variant, size, className })}
+        disabled={disabled || isLoading}
+        {...props}
+      >
       {isLoading ? (
         <>
           <i className="pi pi-spin pi-spinner" />
@@ -67,5 +86,6 @@ export default function Button({
         </>
       )}
     </button>
+    </>
   );
 }
