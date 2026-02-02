@@ -148,6 +148,12 @@ export default function TutorForm() {
     } catch (err: any) {
       setError(err.response?.data?.message || "Erro ao salvar tutor");
       console.error(err);
+      toast.current?.show({
+        severity: "error",
+        summary: "Erro",
+        detail: err.response?.data?.message || "Erro ao salvar pet",
+        life: 3000,
+      });
     }
   };
 
@@ -214,7 +220,7 @@ export default function TutorForm() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6 mt-4">
-          {/* Card da Esquerda - Foto do Tutor */}
+          {/* Foto do Tutor */}
           <div className="space-y-0">
             <Card variant="default" padding="none" className="shadow-xl border-none overflow-hidden h-fit">
               <div className="bg-slate-900 text-white px-5 py-4 flex items-center gap-2">
@@ -282,7 +288,7 @@ export default function TutorForm() {
             </Card>
           </div>
 
-          {/* Card da Direita - Formulário */}
+          {/* Formulário */}
           <Card variant="default" padding="none" className="shadow-xl border-none h-fit">
             <div className="bg-slate-900 text-white px-8 py-6 rounded-t-lg">
               <Text as="h1" variant="heading-xl" className="text-white mb-2">
