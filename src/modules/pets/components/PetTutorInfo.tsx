@@ -10,19 +10,24 @@ export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
   if (!tutores || tutores.length === 0) return null;
 
   return (
-    <Card variant="default" padding="lg" className="shadow-md">
-      <div className="flex items-center gap-2 mb-6">
-        <i className="pi pi-id-card text-yellow-400 text-xl" />
-        <Text as="h2" variant="heading-lg" className="text-slate-900">
-          Tutores Responsáveis
-        </Text>
+    <Card variant="default" padding="none" className="shadow-lg overflow-hidden">
+
+      <div className="bg-slate-900 text-white px-6 py-5 shadow-lg">
+        <div className="flex items-center gap-2">
+          <i className="pi pi-id-card text-yellow-400 text-xl" />
+          <Text as="h2" variant="label-base" className="text-white">
+            Tutores Responsáveis
+          </Text>
+        </div>
       </div>
 
-      {tutores.map((tutor, index) => (
-        <div key={tutor.id}>
-          <div className="space-y-4">
+      {/* Container de informações */}
+      <div className="px-6 pt-4 pb-6">
+        {tutores.map((tutor, index) => (
+          <div key={tutor.id}>
+            <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <i className="pi pi-user text-slate-600 mt-0.5" />
+              <i className="pi pi-user text-yellow-400 mt-0.5" />
               <div className="flex flex-col">
                 <Text variant="body-sm" className="text-slate-600 mb-1">
                   Nome
@@ -35,7 +40,7 @@ export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
 
             {tutor.telefone && (
               <div className="flex items-start gap-3">
-                <i className="pi pi-phone text-slate-600 mt-0.5" />
+                <i className="pi pi-phone text-yellow-400 mt-0.5" />
                 <div className="flex flex-col">
                   <Text variant="body-sm" className="text-slate-600 mb-1">
                     Telefone
@@ -49,7 +54,7 @@ export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
 
             {tutor.email && (
               <div className="flex items-start gap-3">
-                <i className="pi pi-envelope text-slate-600 mt-0.5" />
+                <i className="pi pi-envelope text-yellow-400 mt-0.5" />
                 <div className="flex flex-col">
                   <Text variant="body-sm" className="text-slate-600 mb-1">
                     E-mail
@@ -68,6 +73,7 @@ export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
           )}
         </div>
       ))}
+      </div>
     </Card>
   );
 }
