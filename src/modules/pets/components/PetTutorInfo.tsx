@@ -6,6 +6,15 @@ interface PetTutorInfoProps {
   tutores: Tutor[];
 }
 
+// Função para formatar telefone
+const formatTelefone = (telefone: string): string => {
+  const cleaned = telefone.replace(/\D/g, "");
+  if (cleaned.length === 11) {
+    return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
+  }
+  return telefone;
+};
+
 export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
   if (!tutores || tutores.length === 0) return null;
 
@@ -46,7 +55,7 @@ export default function PetTutorInfo({ tutores }: PetTutorInfoProps) {
                     Telefone
                   </Text>
                   <Text variant="body-base" className="text-slate-900">
-                    {tutor.telefone}
+                    {formatTelefone(tutor.telefone)}
                   </Text>
                 </div>
               </div>
