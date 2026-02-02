@@ -154,7 +154,8 @@ export default function VinculoPets({
                           {pet.nome}
                         </Text>
                         <Text variant="body-sm" className="text-slate-500">
-                          Cachorro • {pet.raca}
+                          {pet.raca} • {pet.idade}{" "}
+                          {pet.idade === 1 ? "ano" : "anos"}
                         </Text>
                       </div>
                     </div>
@@ -163,6 +164,7 @@ export default function VinculoPets({
                       icon="pi pi-plus"
                       onClick={() => handleVincular(pet.id)}
                       className="text-yellow-400 hover:text-yellow-600 hover:bg-transparent transition-colors"
+                      tooltip="Vincular Pet"
                     />
                   </div>
                 ))}
@@ -228,7 +230,8 @@ export default function VinculoPets({
                     icon="pi pi-times"
                     onClick={() => handleDesvincular(pet.id)}
                     className="text-red-500 hover:text-red-600 hover:bg-transparent transition-colors"
-                    // adicionar um tooltip "Desvincular Pet"
+                    tooltip="Desvincular Pet"
+                    tooltipOptions={{ position: "top" }}
                   />
                 </div>
               </Card>

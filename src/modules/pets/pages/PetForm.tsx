@@ -222,6 +222,7 @@ export default function PetForm() {
                         icon="pi pi-trash"
                         onClick={handleDeleteFoto}
                         className="absolute top-2 right-2 bg-red-500 rounded-full transition-colors shadow-lg"
+                        tooltip="Excluir Foto"
                       />
                     )}
                   </div>
