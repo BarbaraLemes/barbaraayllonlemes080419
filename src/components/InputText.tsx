@@ -6,7 +6,7 @@ export const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-slate-300 focus:border-slate-800 focus:ring-2 focus:ring-slate-800/20",
+        default: "border-slate-300 focus:border-transparent focus:ring-2 focus:ring-yellow-400",
         error: "border-red-600 focus:border-red-600 focus:ring-2 focus:ring-red-600/20",
       },
       size: {
@@ -99,6 +99,8 @@ const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
           ref={ref}
           id={inputId}
           disabled={disabled}
+          spellCheck={false}
+          autoComplete="off"
           className={inputVariants({ 
             variant, 
             size, 
