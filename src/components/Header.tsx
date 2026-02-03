@@ -71,6 +71,15 @@ export default function Header() {
 
             <div className="h-9 w-px bg-slate-700"></div>
 
+            <div className="flex items-center gap-2">
+              <div className="bg-yellow-400 rounded-full h-9 w-9 flex items-center justify-center">
+                <i className="pi pi-user text-slate-900 text-sm" />
+              </div>
+              <Text className="text-white text-sm font-medium">admin</Text>
+            </div>
+
+            <div className="h-9 w-px bg-slate-700"></div>
+
             <div className="flex items-center">
               <Button
                 variant="ghost"
