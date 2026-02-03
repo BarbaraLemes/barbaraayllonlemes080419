@@ -3,6 +3,7 @@ import Card from "../../../components/Card";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import InputText from "../../../components/InputText";
+import ConfirmDialog from "../../../components/ConfirmDialog";
 import { useToast } from "../../../contexts/ToastContext";
 import { petsService } from "../../pets/services/pets.service";
 import { tutoresService } from "../services/tutores.service";
@@ -24,6 +25,8 @@ export default function VinculoPets({
   const [isLoading, setIsLoading] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showDesvincularDialog, setShowDesvincularDialog] = useState(false);
+  const [petToDesvincular, setPetToDesvincular] = useState<Pet | null>(null);
 
   const loadPetsDisponiveis = async () => {
     setIsLoading(true);
@@ -60,9 +63,11 @@ export default function VinculoPets({
     }
   };
 
-  const handleDesvincular = async (petId: number) => {
+  const handleDesvincular = async () => {
+    if (!petToDesvincular) return;
+
     try {
-      await tutoresService.removerVinculoPetTutor(tutorId, petId);
+      await tutoresService.removerVinculoPetTutor(tutorId, petToDesvincular.id);
       showToast("success", "Sucesso", "Pet desvinculado com sucesso!");
       onVinculoChange();
     } catch (error) {
@@ -257,7 +262,10 @@ export default function VinculoPets({
                   <Button
                     variant="ghost"
                     icon="pi pi-times"
-                    onClick={() => handleDesvincular(pet.id)}
+                    onClick={() => {
+                      setPetToDesvincular(pet);
+                      setShowDesvincularDialog(true);
+                    }}
                     className="text-red-500 hover:text-red-600 hover:bg-transparent transition-colors"
                     tooltip="Desvincular Pet"
                     tooltipOptions={{ position: "top" }}
@@ -268,6 +276,20 @@ export default function VinculoPets({
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        visible={showDesvincularDialog}
+        onHide={() => {
+          setShowDesvincularDialog(false);
+          setPetToDesvincular(null);
+        }}
+        onConfirm={handleDesvincular}
+        title="Desvincular Pet"
+        message={`Tem certeza que deseja desvincular o pet ${petToDesvincular?.nome}?`}
+        confirmLabel="Desvincular"
+        cancelLabel="Cancelar"
+        severity="warning"
+      />
     </Card>
   );
 }

@@ -8,6 +8,7 @@ import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import InputText from "../../../components/InputText";
+import ConfirmDialog from "../../../components/ConfirmDialog";
 import { petsService } from "../services/pets.service";
 import type { PetRequest } from "../types/pets.types";
 import { useToast } from "../../../contexts/ToastContext";
@@ -31,6 +32,7 @@ export default function PetForm() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [currentFoto, setCurrentFoto] = useState<{ id: number; url: string } | null>(null);
+  const [showDeleteFotoDialog, setShowDeleteFotoDialog] = useState(false);
   const fileUploadRef = useRef<FileUpload>(null);
 
   const {
@@ -142,15 +144,13 @@ export default function PetForm() {
   const handleDeleteFoto = async () => {
     if (!currentFoto || !id) return;
 
-    if (window.confirm("Tem certeza que deseja excluir esta foto?")) {
-      try {
-        await petsService.deleteFotoPet(Number(id), currentFoto.id);
-        setCurrentFoto(null);
-        showToast("success", "Sucesso", "Foto excluída com sucesso!");
-      } catch (err) {
-        console.error("Erro ao excluir foto:", err);
-        showToast("error", "Erro", "Erro ao excluir foto. Tente novamente.");
-      }
+    try {
+      await petsService.deleteFotoPet(Number(id), currentFoto.id);
+      setCurrentFoto(null);
+      showToast("success", "Sucesso", "Foto excluída com sucesso!");
+    } catch (err) {
+      console.error("Erro ao excluir foto:", err);
+      showToast("error", "Erro", "Erro ao excluir foto. Tente novamente.");
     }
   };
 
@@ -201,7 +201,7 @@ export default function PetForm() {
                         type="button"
                         variant="danger"
                         icon="pi pi-trash"
-                        onClick={handleDeleteFoto}
+                        onClick={() => setShowDeleteFotoDialog(true)}
                         className="absolute top-2 right-2 bg-red-500 rounded-full transition-colors shadow-lg"
                         tooltip="Excluir Foto"
                       />
@@ -315,6 +315,17 @@ export default function PetForm() {
           </Card>
         </div>
       </div>
+
+      <ConfirmDialog
+        visible={showDeleteFotoDialog}
+        onHide={() => setShowDeleteFotoDialog(false)}
+        onConfirm={handleDeleteFoto}
+        title="Excluir Foto"
+        message="Tem certeza que deseja excluir esta foto?"
+        confirmLabel="Excluir"
+        cancelLabel="Cancelar"
+        severity="danger"
+      />
     </div>
   );
 }

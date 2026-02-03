@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import { usePetDetail } from "../hooks/usePetDetail";
 import { petsService } from "../services/pets.service";
 import { useToast } from "../../../contexts/ToastContext";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
+import ConfirmDialog from "../../../components/ConfirmDialog";
 import ImagePetDetail from "../components/ImagePetDetail";
 import InfoPetDetail from "../components/InfoPetDetail";
 import PetTutorInfo from "../components/PetTutorInfo";
@@ -13,6 +15,7 @@ export default function PetDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const { pet, isLoading, error } = usePetDetail(Number(id));
 
   const handleEdit = () => {
@@ -20,15 +23,13 @@ export default function PetDetail() {
   };
 
   const handleDelete = async () => {
-    if (window.confirm("Tem certeza que deseja excluir este pet?")) {
-      try {
-        await petsService.deletePet(Number(id));
-        showToast("success", "Sucesso", "Pet excluído com sucesso!");
-        navigate("/pets");
-      } catch (error) {
-        console.error("Erro ao excluir pet:", error);
-        showToast("error", "Erro", "Não foi possível excluir o pet. Tente novamente.");
-      }
+    try {
+      await petsService.deletePet(Number(id));
+      showToast("success", "Sucesso", "Pet excluído com sucesso!");
+      navigate("/pets");
+    } catch (error) {
+      console.error("Erro ao excluir pet:", error);
+      showToast("error", "Erro", "Não foi possível excluir o pet. Tente novamente.");
     }
   };
 
@@ -79,7 +80,7 @@ export default function PetDetail() {
               raca={pet.raca}
               nome={pet.nome}
               onEdit={handleEdit}
-              onDelete={handleDelete}
+              onDelete={() => setShowDeleteDialog(true)}
             />
 
             {pet.tutores && pet.tutores.length > 0 ? (
@@ -106,6 +107,17 @@ export default function PetDetail() {
           </div>
         </div>
       </div>
+
+      <ConfirmDialog
+        visible={showDeleteDialog}
+        onHide={() => setShowDeleteDialog(false)}
+        onConfirm={handleDelete}
+        title="Excluir Pet"
+        message={`Tem certeza que deseja excluir o pet: ${pet.nome}?`}
+        confirmLabel="Excluir Pet"
+        cancelLabel="Cancelar"
+        severity="danger"
+      />
     </div>
   );
 }
