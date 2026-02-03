@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
+import InputText from "../../../components/InputText";
+import { useToast } from "../../../contexts/ToastContext";
 import { petsService } from "../../pets/services/pets.service";
 import { tutoresService } from "../services/tutores.service";
 import type { Pet } from "../../pets/types/pets.types";
@@ -17,9 +19,11 @@ export default function VinculoPets({
   petsVinculados,
   onVinculoChange,
 }: VinculoPetsProps) {
+  const { showToast } = useToast();
   const [petsDisponiveis, setPetsDisponiveis] = useState<Pet[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const loadPetsDisponiveis = async () => {
     setIsLoading(true);
@@ -46,19 +50,24 @@ export default function VinculoPets({
   const handleVincular = async (petId: number) => {
     try {
       await tutoresService.vincularPetTutor(tutorId, petId);
+      showToast("success", "Sucesso", "Pet vinculado com sucesso!");
       setShowSelector(false);
+      setSearchTerm("");
       onVinculoChange();
     } catch (error) {
       console.error("Erro ao vincular pet:", error);
+      showToast("error", "Erro", "Não foi possível vincular o pet. Tente novamente.");
     }
   };
 
   const handleDesvincular = async (petId: number) => {
     try {
       await tutoresService.removerVinculoPetTutor(tutorId, petId);
+      showToast("success", "Sucesso", "Pet desvinculado com sucesso!");
       onVinculoChange();
     } catch (error) {
       console.error("Erro ao desvincular pet:", error);
+      showToast("error", "Erro", "Não foi possível desvincular o pet. Tente novamente.");
     }
   };
 
@@ -111,8 +120,21 @@ export default function VinculoPets({
               <Button
               variant="ghost"
               icon="pi pi-times"
-                onClick={() => setShowSelector(false)}
+                onClick={() => {
+                  setShowSelector(false);
+                  setSearchTerm("");
+                }}
                 className="text-slate-600 hover:text-slate-900"
+              />
+            </div>
+
+            {/* Input de pesquisa */}
+            <div className="mb-4">
+              <InputText
+                placeholder="Pesquisar por nome ou raça..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full"
               />
             </div>
 
@@ -120,16 +142,22 @@ export default function VinculoPets({
               <div className="text-center py-4">
                 <i className="pi pi-spin pi-spinner text-slate-400 text-2xl" />
               </div>
-            ) : petsDisponiveis.length === 0 ? (
-              <Text
-                variant="body-sm"
-                className="text-slate-600 text-center py-4"
-              >
-                Nenhum pet disponível para vincular
-              </Text>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {petsDisponiveis.map((pet) => (
+            ) : (() => {
+                const petsFiltrados = petsDisponiveis.filter((pet) =>
+                  pet.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  pet.raca?.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                return petsFiltrados.length === 0 ? (
+                  <Text
+                    variant="body-sm"
+                    className="text-slate-600 text-center py-4"
+                  >
+                    {searchTerm ? "Nenhum pet encontrado com esse critério" : "Nenhum pet disponível para vincular"}
+                  </Text>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {petsFiltrados.map((pet) => (
                   <div
                     key={pet.id}
                     className="flex items-center justify-between p-4 bg-white rounded-lg border border-slate-200 hover:border-yellow-400 transition-colors"
@@ -169,7 +197,8 @@ export default function VinculoPets({
                   </div>
                 ))}
               </div>
-            )}
+            );
+          })()}
           </Card>
         )}
 
