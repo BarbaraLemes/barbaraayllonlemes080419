@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
-import { Toast } from "primereact/toast";
+import { useState } from "react";
 import Button from "../../../components/Button";
 import InputText from "../../../components/InputText";
 import Text from "../../../components/Text";
 import Card from "../../../components/Card";
 import { useAuth } from "../hooks/useAuth";
+import { useToast } from "../../../contexts/ToastContext";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Usuário é obrigatório"),
@@ -20,7 +20,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 export default function Login() {
   const navigate = useNavigate();
   const { login, error: authError, isLoading } = useAuth();
-  const toast = useRef<Toast>(null);
+  const { showToast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -41,18 +41,17 @@ export default function Login() {
   };
 
   const handleForgotPassword = () => {
-    toast.current?.show({
-      severity: "info",
-      summary: "Funcionalidade Ilustrativa",
-      detail: "Em ambiente real, o reset de senha seria enviado por e-mail.",
-      life: 5000,
-    });
+    showToast(
+      "info",
+      "Funcionalidade Ilustrativa",
+      "Em ambiente real, o reset de senha seria enviado por e-mail.",
+      5000
+    );
   };
   
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Toast ref={toast} />
         <Card variant="default" padding="lg" className="w-full max-w-md border-none shadow-xl">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">

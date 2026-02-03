@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FileUpload } from "primereact/fileupload";
-import { Toast } from "primereact/toast";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import Card from "../../../components/Card";
 import InputText from "../../../components/InputText";
 import { petsService } from "../services/pets.service";
 import type { PetRequest } from "../types/pets.types";
+import { useToast } from "../../../contexts/ToastContext";
 
 // Schema de validação com Zod
 const petFormSchema = z.object({
@@ -25,12 +25,12 @@ export default function PetForm() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const isEditing = !!id && id !== "novo";
+  const { showToast } = useToast();
 
   const [isLoadingData, setIsLoadingData] = useState(isEditing);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [currentFoto, setCurrentFoto] = useState<{ id: number; url: string } | null>(null);
-  const toast = useRef<Toast>(null);
   const fileUploadRef = useRef<FileUpload>(null);
 
   const {
@@ -80,12 +80,7 @@ export default function PetForm() {
       
       // Validar idade
       if (isNaN(idade) || idade < 0 || idade > 60) {
-        toast.current?.show({
-          severity: "error",
-          summary: "Erro",
-          detail: "Idade deve ser um número entre 0 e 60",
-          life: 3000,
-        });
+        showToast("error", "Erro", "Idade deve ser um número entre 0 e 60");
         return;
       }
 
@@ -111,25 +106,22 @@ export default function PetForm() {
           await petsService.uploadFotoPet(petId, selectedFile);
         } catch (uploadErr) {
           console.error("Erro ao fazer upload da foto:", uploadErr);
-          toast.current?.show({
-            severity: "warn",
-            summary: "Aviso",
-            detail: "Pet salvo, mas houve erro ao enviar a foto.",
-            life: 3000,
-          });
+          showToast("warn", "Aviso", "Pet salvo, mas houve erro ao enviar a foto.");
         }
+      }
+
+      // Mostrar toast de sucesso
+      if (isEditing) {
+        showToast("success", "Sucesso", "Alterações salvas com sucesso!");
+      } else {
+        showToast("success", "Sucesso", "Pet cadastrado com sucesso!");
       }
 
       // Redirecionar para a página de detalhes
       navigate(`/pets/${petId}`);
     } catch (err: any) {
       console.error("Erro ao salvar pet:", err);
-      toast.current?.show({
-        severity: "error",
-        summary: "Erro",
-        detail: err.response?.data?.message || "Erro ao salvar pet",
-        life: 3000,
-      });
+      showToast("error", "Erro", err.response?.data?.message || "Erro ao salvar pet");
     }
   };
 
@@ -154,20 +146,10 @@ export default function PetForm() {
       try {
         await petsService.deleteFotoPet(Number(id), currentFoto.id);
         setCurrentFoto(null);
-        toast.current?.show({
-          severity: "success",
-          summary: "Sucesso",
-          detail: "Foto excluída com sucesso!",
-          life: 3000,
-        });
+        showToast("success", "Sucesso", "Foto excluída com sucesso!");
       } catch (err) {
         console.error("Erro ao excluir foto:", err);
-        toast.current?.show({
-          severity: "error",
-          summary: "Erro",
-          detail: "Erro ao excluir foto. Tente novamente.",
-          life: 3000,
-        });
+        showToast("error", "Erro", "Erro ao excluir foto. Tente novamente.");
       }
     }
   };
@@ -182,7 +164,6 @@ export default function PetForm() {
 
   return (
     <div className="min-h-screen p-6 bg-slate-50">
-      <Toast ref={toast} />
       <div className="max-w-7xl mx-auto">
 
         <div className="mb-6">

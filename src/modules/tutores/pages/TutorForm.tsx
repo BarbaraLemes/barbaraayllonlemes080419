@@ -5,13 +5,13 @@ import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
 import { FileUpload } from "primereact/fileupload";
 import { InputMask } from "primereact/inputmask";
-import { Toast } from "primereact/toast";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import InputText from "../../../components/InputText";
 import { tutoresService } from "../services/tutores.service";
 import type { CreateTutorRequest } from "../types/tutores.types";
+import { useToast } from "../../../contexts/ToastContext";
 
 // Schema de validação com Zod
 const tutorFormSchema = z.object({
@@ -28,13 +28,13 @@ export default function TutorForm() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const isEditing = !!id && id !== "novo";
+  const { showToast } = useToast();
 
   const [isLoadingData, setIsLoadingData] = useState(isEditing);
   const [error, setError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [currentFoto, setCurrentFoto] = useState<{ id: number; url: string } | null>(null);
-  const toast = useRef<Toast>(null);
   const fileUploadRef = useRef<FileUpload>(null);
 
   // Função para ajudar a exibir InputMask com validação de erro
@@ -127,33 +127,25 @@ export default function TutorForm() {
       if (selectedFile) {
         try {
           await tutoresService.uploadFotoTutor(tutorId, selectedFile);
-
         } catch (uploadErr) {
           console.error("Erro ao fazer upload da foto:", uploadErr);
-          toast.current?.show({
-            severity: "warn",
-            summary: "Aviso",
-            detail: "Tutor salvo, mas houve erro ao enviar a foto.",
-            life: 3000,
-          });
+          showToast("warn", "Aviso", "Tutor salvo, mas houve erro ao enviar a foto.");
         }
       }
 
-      // Redirecionar para a página de detalhes se for novo cadastro
+      // Mostrar toast de sucesso
       if (isEditing) {
-        navigate(`/tutores/${tutorId}`);
+        showToast("success", "Sucesso", "Alterações salvas com sucesso!");
       } else {
-        navigate(`/tutores/${tutorId}`);
+        showToast("success", "Sucesso", "Tutor cadastrado com sucesso!");
       }
+
+      // Redirecionar para a página de detalhes
+      navigate(`/tutores/${tutorId}`);
     } catch (err: any) {
       setError(err.response?.data?.message || "Erro ao salvar tutor");
       console.error(err);
-      toast.current?.show({
-        severity: "error",
-        summary: "Erro",
-        detail: err.response?.data?.message || "Erro ao salvar pet",
-        life: 3000,
-      });
+      showToast("error", "Erro", err.response?.data?.message || "Erro ao salvar tutor");
     }
   };
 
@@ -178,20 +170,10 @@ export default function TutorForm() {
       try {
         await tutoresService.deleteFotoTutor(Number(id), currentFoto.id);
         setCurrentFoto(null);
-        toast.current?.show({
-          severity: "success",
-          summary: "Sucesso",
-          detail: "Foto excluída com sucesso!",
-          life: 3000,
-        });
+        showToast("success", "Sucesso", "Foto excluída com sucesso!");
       } catch (err) {
         console.error("Erro ao excluir foto:", err);
-        toast.current?.show({
-          severity: "error",
-          summary: "Erro",
-          detail: "Erro ao excluir foto. Tente novamente.",
-          life: 3000,
-        });
+        showToast("error", "Erro", "Erro ao excluir foto. Tente novamente.");
       }
     }
   };
@@ -206,7 +188,6 @@ export default function TutorForm() {
 
   return (
     <div className="min-h-screen p-6 bg-slate-50">
-      <Toast ref={toast} />
       <div className="max-w-7xl mx-auto">
 
         <div className="mb-6">
