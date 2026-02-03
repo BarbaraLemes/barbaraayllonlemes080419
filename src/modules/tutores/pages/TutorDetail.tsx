@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useTutorDetail } from "../hooks/useTutorDetail";
+import { tutoresService } from "../services/tutores.service";
+import { useToast } from "../../../contexts/ToastContext";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import ImageTutorDetail from "../components/ImageTutorDetail";
@@ -9,6 +11,7 @@ import VinculoPets from "../components/VinculoPets";
 export default function TutorDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const { tutor, isLoading, error, loadTutor } = useTutorDetail(Number(id));
 
   const handleEdit = () => {
@@ -18,11 +21,12 @@ export default function TutorDetail() {
   const handleDelete = async () => {
     if (window.confirm("Tem certeza que deseja excluir este tutor?")) {
       try {
-        // TODO: Implementar exclusão
-        console.log("Excluir tutor", id);
+        await tutoresService.deleteTutor(Number(id));
+        showToast("success", "Sucesso", "Tutor excluído com sucesso!");
         navigate("/tutores");
       } catch (error) {
         console.error("Erro ao excluir tutor:", error);
+        showToast("error", "Erro", "Não foi possível excluir o tutor. Tente novamente.");
       }
     }
   };

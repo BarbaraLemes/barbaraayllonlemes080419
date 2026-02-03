@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { usePetDetail } from "../hooks/usePetDetail";
+import { petsService } from "../services/pets.service";
+import { useToast } from "../../../contexts/ToastContext";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
 import ImagePetDetail from "../components/ImagePetDetail";
@@ -10,15 +12,24 @@ import Card from "../../../components/Card";
 export default function PetDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const { pet, isLoading, error } = usePetDetail(Number(id));
 
   const handleEdit = () => {
     navigate(`/pets/${id}/editar`);
   };
 
-  const handleDelete = () => {
-    // TODO: Implementar exclusão
-    console.log("Excluir pet", id);
+  const handleDelete = async () => {
+    if (window.confirm("Tem certeza que deseja excluir este pet?")) {
+      try {
+        await petsService.deletePet(Number(id));
+        showToast("success", "Sucesso", "Pet excluído com sucesso!");
+        navigate("/pets");
+      } catch (error) {
+        console.error("Erro ao excluir pet:", error);
+        showToast("error", "Erro", "Não foi possível excluir o pet. Tente novamente.");
+      }
+    }
   };
 
   if (isLoading) {
