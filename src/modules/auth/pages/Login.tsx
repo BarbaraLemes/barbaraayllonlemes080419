@@ -51,8 +51,16 @@ export default function Login() {
   
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-        <Card variant="default" padding="lg" className="w-full max-w-md border-none shadow-xl">
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 relative"
+      style={{
+        backgroundImage: 'url("/background_login.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+        <Card variant="default" padding="lg" className="w-full max-w-md border-none shadow-xl backdrop-blur-sm bg-white/95">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <img src="/iconPata.svg" alt="Pata" className="h-16" />

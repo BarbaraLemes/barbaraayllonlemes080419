@@ -5,5 +5,10 @@
 @layer base {
   body {
     @apply bg-slate-100;
+    background-image: url('/background_login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 }
