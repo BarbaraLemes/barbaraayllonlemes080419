@@ -89,25 +89,31 @@ export default function PetList() {
 
             {/* Paginação */}
             {pets.length > 0 && pagination.pageCount > 1 && (
-              <div className="mt-8 flex justify-center">
+              <div className="mt-9 flex justify-center">
                 <Paginator
                   first={pagination.page * pagination.size}
                   rows={pagination.size}
                   totalRecords={pagination.total}
                   onPageChange={handlePageChange}
-                  // template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPage"
-                  // className="bg-transparent border-none"
+                  template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                   pt={{
-                    //   root: { className: 'bg-transparent border-none' },
-                    //   firstPageButton: { className: 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1' },
-                    //   previousPageButton: { className: 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1' },
-                    //   nextPageButton: { className: 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1' },
-                    //   lastPageButton: { className: 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1' },
-                    pageButton: {
-                      className:
-                        "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1 min-w-[2.5rem]",
+                    firstPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
-                    //   current: { className: 'bg-slate-800 text-white border-slate-800 hover:bg-slate-900' }
+                    prevPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    nextPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    lastPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    pageButton: (options: any) => ({
+                      className: options.context.active
+                        ? "bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-semibold rounded-full mx-1"
+                        : "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1",
+                    }),
                   }}
                 />
               </div>

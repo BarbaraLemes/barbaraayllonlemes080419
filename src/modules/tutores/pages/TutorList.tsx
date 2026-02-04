@@ -94,11 +94,25 @@ export default function TutorList() {
                   rows={pagination.size}
                   totalRecords={pagination.total}
                   onPageChange={handlePageChange}
+                  template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                   pt={{
-                    pageButton: {
-                      className:
-                        "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg mx-1 min-w-[2.5rem]",
+                    firstPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
+                    prevPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    nextPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    lastPageButton: {
+                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                    },
+                    pageButton: (options: any) => ({
+                      className: options.context.active
+                        ? "bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-semibold rounded-full mx-1"
+                        : "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1",
+                    }),
                   }}
                 />
               </div>
