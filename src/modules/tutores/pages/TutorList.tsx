@@ -27,6 +27,7 @@ export default function TutorList() {
 
   const handlePageChange = (event: any) => {
     const newPage = event.page;
+    window.scrollTo(0, 0);
     loadTutores({ nome: searchTerm, page: newPage, size: 10 });
   };
 

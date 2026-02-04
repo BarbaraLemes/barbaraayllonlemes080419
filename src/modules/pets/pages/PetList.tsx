@@ -27,6 +27,7 @@ export default function PetList() {
 
   const handlePageChange = (event: any) => {
     const newPage = event.page;
+    window.scrollTo(0, 0);
     loadPets({ nome: searchTerm, page: newPage, size: 10 });
   };
 
