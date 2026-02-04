@@ -187,7 +187,7 @@ export default function TutorForm() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-slate-50">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
 
         <div className="mb-6">
@@ -195,6 +195,7 @@ export default function TutorForm() {
             icon="pi pi-arrow-left"
             onClick={() => navigate(isEditing ? `/tutores/${id}` : "/tutores")}
             variant="ghost"
+            className="text-xs sm:text-sm md:text-base"
           >
             {isEditing ? "Voltar para detalhes" : "Voltar para lista de tutores"}
           </Button>
@@ -350,7 +351,7 @@ export default function TutorForm() {
                 <Button
                   type="submit"
                   variant="warning"
-                  className="flex-1"
+                  className="flex-1 text-xs sm:text-sm md:text-base"
                   isLoading={isSubmitting}
                   disabled={isSubmitting}
                 >
@@ -361,7 +362,7 @@ export default function TutorForm() {
                   variant="cancel"
                   onClick={handleCancel}
                   disabled={isSubmitting}
-                  className="flex-1"
+                  className="flex-1 text-xs sm:text-sm md:text-base"
                 >
                   Cancelar
                 </Button>

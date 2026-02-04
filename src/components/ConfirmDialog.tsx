@@ -72,7 +72,7 @@ export default function ConfirmDialog({
           type="button"
           variant="ghost"
           onClick={onHide}
-          className="px-6"
+          className="px-6 text-xs sm:text-sm md:text-base"
           icon="pi pi-times"
         >
           {cancelLabel}
@@ -81,7 +81,7 @@ export default function ConfirmDialog({
           type="button"
           variant={severity === "danger" ? "danger" : "warning"}
           onClick={handleConfirm}
-          className="px-6"
+          className="px-6 text-xs sm:text-sm md:text-base"
           icon="pi pi-trash"
         >
           {confirmLabel}

@@ -163,7 +163,7 @@ export default function PetForm() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-slate-50">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
 
         <div className="mb-6">
@@ -171,6 +171,7 @@ export default function PetForm() {
             icon="pi pi-arrow-left"
             onClick={() => navigate(isEditing ? `/pets/${id}` : "/pets")}
             variant="ghost"
+            className="text-xs sm:text-sm md:text-base"
           >
             {isEditing ? "Voltar para detalhes" : "Voltar para lista de pets"}
           </Button>
@@ -291,11 +292,13 @@ export default function PetForm() {
                 />
               </div>
 
-              <div className="flex gap-4 pt-4">
+              <hr className="my-6" />
+
+              <div className="flex gap-4">
                 <Button
                   type="submit"
                   variant="warning"
-                  className="flex-1"
+                  className="flex-1 text-xs sm:text-sm md:text-base"
                   isLoading={isSubmitting}
                   disabled={isSubmitting}
                 >
@@ -306,7 +309,7 @@ export default function PetForm() {
                   variant="cancel"
                   onClick={handleCancel}
                   disabled={isSubmitting}
-                  className="flex-1"
+                  className="flex-1 text-xs sm:text-sm md:text-base"
                 >
                   Cancelar
                 </Button>

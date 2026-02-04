@@ -53,7 +53,7 @@ export default function PetDetail() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-slate-50">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         {/* Botão voltar */}
         <div className="mb-6">
@@ -113,7 +113,7 @@ export default function PetDetail() {
         onHide={() => setShowDeleteDialog(false)}
         onConfirm={handleDelete}
         title="Excluir Pet"
-        message={`Tem certeza que deseja excluir o pet: ${pet.nome}?`}
+        message={`Tem certeza que deseja excluir: ${pet.nome}?`}
         confirmLabel="Excluir Pet"
         cancelLabel="Cancelar"
         severity="danger"

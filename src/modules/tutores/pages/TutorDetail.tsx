@@ -52,14 +52,14 @@ export default function TutorDetail() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-slate-50">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6">
           <Button
             icon="pi pi-arrow-left"
             onClick={() => navigate("/tutores")}
             variant="ghost"
-            className="text-slate-600 hover:text-slate-900"
+            className="text-slate-600 hover:text-slate-900 text-xs sm:text-sm md:text-base"
           >
             Voltar para lista de tutores
           </Button>
@@ -102,7 +102,7 @@ export default function TutorDetail() {
         onHide={() => setShowDeleteDialog(false)}
         onConfirm={handleDelete}
         title="Excluir Tutor"
-        message={`Tem certeza que deseja excluir o tutor: ${tutor.nome}?`}
+        message={`Tem certeza que deseja excluir: ${tutor.nome}?`}
         confirmLabel="Excluir Tutor"
         cancelLabel="Cancelar"
         severity="danger"

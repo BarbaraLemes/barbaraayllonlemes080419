@@ -102,7 +102,7 @@ export default function VinculoPets({
           <Button
             variant="primary"
             onClick={() => setShowSelector(!showSelector)}
-            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border-none"
+            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border-none text-xs sm:text-sm md:text-base"
           >
             <i className="pi pi-plus" />
             Vincular Pet
@@ -129,7 +129,7 @@ export default function VinculoPets({
                   setShowSelector(false);
                   setSearchTerm("");
                 }}
-                className="text-slate-600 hover:text-slate-900"
+                className="text-slate-600 hover:text-slate-900 text-xs sm:text-sm md:text-base"
               />
             </div>
 
@@ -285,7 +285,7 @@ export default function VinculoPets({
         }}
         onConfirm={handleDesvincular}
         title="Desvincular Pet"
-        message={`Tem certeza que deseja desvincular o pet ${petToDesvincular?.nome}?`}
+        message={`Tem certeza que deseja desvincular o pet: ${petToDesvincular?.nome}?`}
         confirmLabel="Desvincular"
         cancelLabel="Cancelar"
         severity="warning"

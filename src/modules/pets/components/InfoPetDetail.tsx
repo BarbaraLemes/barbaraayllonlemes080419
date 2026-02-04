@@ -43,11 +43,11 @@ export default function InfoPetDetail({
             {nome}
           </Text>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Button
               variant="secondary"
               onClick={onEdit}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-xs sm:text-sm md:text-base px-2 sm:px-4 justify-center"
             >
               <i className="pi pi-pencil" />
               Editar
@@ -55,7 +55,7 @@ export default function InfoPetDetail({
             <Button
               variant="danger"
               onClick={onDelete}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-xs sm:text-sm md:text-base px-2 sm:px-4 justify-center"
             >
               <i className="pi pi-trash" />
               Excluir

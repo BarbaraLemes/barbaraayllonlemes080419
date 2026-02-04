@@ -32,7 +32,18 @@ export function ToastProvider({ children }: ToastProviderProps) {
 
   return (
     <ToastContext.Provider value={{ showToast }}>
-      <Toast ref={toast} />
+      <Toast 
+        ref={toast} 
+        position="top-center"
+        pt={{
+          root: {
+            className: "w-[90vw] sm:w-auto max-w-[90vw] sm:max-w-none"
+          },
+          message: {
+            className: "text-xs sm:text-sm"
+          }
+        }}
+      />
       {children}
     </ToastContext.Provider>
   );

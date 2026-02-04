@@ -6,7 +6,7 @@ interface ImagePetDetailProps {
 export default function ImagePetDetail({ imageUrl, nome }: ImagePetDetailProps) {
   return (
     <div className="sticky top-24">
-      <div className="w-80 h-80 bg-slate-200 rounded-lg overflow-hidden shadow-lg flex items-center justify-center mb-4 relative">
+      <div className="w-80 h-80 mx-auto bg-slate-200 rounded-lg overflow-hidden shadow-lg flex items-center justify-center mb-4 relative">
         {imageUrl ? (
           <img
             src={imageUrl}
