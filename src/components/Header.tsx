@@ -13,6 +13,16 @@ export default function Header() {
     navigate("/login");
   };
 
+  const handleNavigateToPets = () => {
+    sessionStorage.removeItem('pets-current-page');
+    navigate("/pets");
+  };
+
+  const handleNavigateToTutores = () => {
+    sessionStorage.removeItem('tutores-current-page');
+    navigate("/tutores");
+  };
+
   // Verifica se a rota atual está ativa para aplicar estilo
   const isActive = (path: string) => {
     return location.pathname.startsWith(path);
@@ -22,7 +32,7 @@ export default function Header() {
     <header className="bg-slate-900 shadow-xl sticky top-0 z-50">
       <div className="max-w-8xl mx-auto sm:px-5 lg:py-2">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={handleNavigateToPets}>
             <div className="flex justify-center items-center">
               <img src="/Pata.svg" alt="Pata" className="h-14" />
             </div>
@@ -40,7 +50,7 @@ export default function Header() {
             <nav className="flex gap-1 md:gap-2">
               <Button
                 variant={isActive("/pets") ? "primary" : "ghost"}
-                onClick={() => navigate("/pets")}
+                onClick={handleNavigateToPets}
                 className={`
                   px-3 py-2 md:px-5 rounded-lg font-medium transition-all text-sm md:text-base
                   ${
@@ -55,7 +65,7 @@ export default function Header() {
 
               <Button
                 variant={isActive("/tutores") ? "primary" : "ghost"}
-                onClick={() => navigate("/tutores")}
+                onClick={handleNavigateToTutores}
                 className={`
                   px-3 py-2 md:px-5 rounded-lg font-medium transition-all text-sm md:text-base
                   ${
