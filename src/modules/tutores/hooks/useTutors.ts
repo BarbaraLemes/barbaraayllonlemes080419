@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { tutoresService } from "../services/tutores.service";
-import type { Tutor, TutorQueryParams, TutoresState } from "../types/tutores.types";
+import type { TutorQueryParams, TutoresState } from "../types/tutores.types";
 
 export function useTutors() {
   const [state, setState] = useState<TutoresState>({
@@ -19,6 +19,9 @@ export function useTutors() {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
+      if (params?.page !== undefined) {
+        sessionStorage.setItem('tutores-current-page', params.page.toString());
+      }
       const response = await tutoresService.getTutores(params);
       setState({
         tutores: response.content,
@@ -41,7 +44,9 @@ export function useTutors() {
   };
 
   useEffect(() => {
-    loadTutores();
+    const savedPage = sessionStorage.getItem('tutores-current-page');
+    const page = savedPage ? parseInt(savedPage) : 0;
+    loadTutores({ page, size: 10 });
   }, []);
 
   return {

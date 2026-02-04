@@ -14,10 +14,15 @@ export function usePets(initialFilters?: PetsQueryParams) {
   }, []);
 
   useEffect(() => {
-    loadPets({ ...initialFilters, size: 10 });
+    const savedPage = sessionStorage.getItem('pets-current-page');
+    const page = savedPage ? parseInt(savedPage) : 0;
+    loadPets({ ...initialFilters, page, size: 10 });
   }, []);
 
   const loadPets = async (params?: PetsQueryParams) => {
+    if (params?.page !== undefined) {
+      sessionStorage.setItem('pets-current-page', params.page.toString());
+    }
     await petsFacade.loadPets(params);
   };
 
