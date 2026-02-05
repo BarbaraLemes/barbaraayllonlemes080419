@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Paginator } from "primereact/paginator";
-import Text from "../../../components/Text";
-import Button from "../../../components/Button";
-import { useTutors } from "../hooks/useTutors";
-import TutorCard from "../components/TutorCard";
-import BuscarTutores from "../components/BuscarTutores";
+import Text from "../../../../components/Text";
+import Button from "../../../../components/Button";
+import { useTutors } from "../../hooks/useTutors";
+import TutorCard from "./components/TutorCard";
+import BuscarTutores from "./components/BuscarTutores";
 
 export default function TutorList() {
   const navigate = useNavigate();

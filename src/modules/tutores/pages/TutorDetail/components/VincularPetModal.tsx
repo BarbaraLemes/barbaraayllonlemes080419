@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Paginator } from "primereact/paginator";
-import Modal from "../../../components/Modal";
-import InputText from "../../../components/InputText";
-import Button from "../../../components/Button";
-import Text from "../../../components/Text";
-import type { Pet } from "../../pets/types/pets.types";
+import Modal from "../../../../../components/Modal";
+import InputText from "../../../../../components/InputText";
+import Button from "../../../../../components/Button";
+import Text from "../../../../../components/Text";
+import type { Pet } from "../../../../pets/types/pets.types";
 
 interface VincularPetModalProps {
   visible: boolean;

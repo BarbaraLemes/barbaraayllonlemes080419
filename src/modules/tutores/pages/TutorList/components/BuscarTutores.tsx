@@ -1,6 +1,6 @@
 import { useState } from "react";
-import InputText from "../../../components/InputText";
-import Button from "../../../components/Button";
+import InputText from "../../../../../components/InputText";
+import Button from "../../../../../components/Button";
 
 interface BuscarTutoresProps {
   onSearch: (searchTerm: string) => void;

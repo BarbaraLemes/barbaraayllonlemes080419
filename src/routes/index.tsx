@@ -8,9 +8,9 @@ const Login = lazy(() => import("../modules/auth/pages/Login"));
 const PetList = lazy(() => import("../modules/pets/pages/PetList/PetList"));
 const PetDetail = lazy(() => import("../modules/pets/pages/PetDetail/PetDetail"));
 const PetForm = lazy(() => import("../modules/pets/pages/PetForm/PetForm"));
-const TutorList = lazy(() => import("../modules/tutores/pages/TutorList"));
-const TutorDetail = lazy(() => import("../modules/tutores/pages/TutorDetail"));
-const TutorForm = lazy(() => import("../modules/tutores/pages/TutorForm"));
+const TutorList = lazy(() => import("../modules/tutores/pages/TutorList/TutorList"));
+const TutorDetail = lazy(() => import("../modules/tutores/pages/TutorDetail/TutorDetail"));
+const TutorForm = lazy(() => import("../modules/tutores/pages/TutorForm/TutorForm"));
 
 // Loading component
 const LoadingFallback = () => (

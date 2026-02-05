@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { useTutorDetail } from "../hooks/useTutorDetail";
-import { tutoresService } from "../services/tutores.service";
-import { useToast } from "../../../contexts/ToastContext";
-import Text from "../../../components/Text";
-import Button from "../../../components/Button";
-import ConfirmDialog from "../../../components/ConfirmDialog";
-import ImageTutorDetail from "../components/ImageTutorDetail";
-import InfoTutorDetail from "../components/InfoTutorDetail";
-import VinculoPets from "../components/VinculoPets";
+import { useTutorDetail } from "../../hooks/useTutorDetail";
+import { tutoresService } from "../../services/tutores.service";
+import { useToast } from "../../../../contexts/ToastContext";
+import Text from "../../../../components/Text";
+import Button from "../../../../components/Button";
+import ConfirmDialog from "../../../../components/ConfirmDialog";
+import ImageTutorDetail from "./components/ImageTutorDetail";
+import InfoTutorDetail from "./components/InfoTutorDetail";
+import VinculoPets from "./components/VinculoPets";
 
 export default function TutorDetail() {
   const { id } = useParams<{ id: string }>();

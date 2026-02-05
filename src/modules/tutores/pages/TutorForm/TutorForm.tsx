@@ -5,14 +5,14 @@ import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
 import { FileUpload } from "primereact/fileupload";
 import { InputMask } from "primereact/inputmask";
-import Card from "../../../components/Card";
-import Text from "../../../components/Text";
-import Button from "../../../components/Button";
-import InputText from "../../../components/InputText";
-import ConfirmDialog from "../../../components/ConfirmDialog";
-import { tutoresService } from "../services/tutores.service";
-import type { CreateTutorRequest } from "../types/tutores.types";
-import { useToast } from "../../../contexts/ToastContext";
+import Card from "../../../../components/Card";
+import Text from "../../../../components/Text";
+import Button from "../../../../components/Button";
+import InputText from "../../../../components/InputText";
+import ConfirmDialog from "../../../../components/ConfirmDialog";
+import { tutoresService } from "../../services/tutores.service";
+import type { CreateTutorRequest } from "../../types/tutores.types";
+import { useToast } from "../../../../contexts/ToastContext";
 
 // Schema de validação com Zod
 const tutorFormSchema = z.object({
