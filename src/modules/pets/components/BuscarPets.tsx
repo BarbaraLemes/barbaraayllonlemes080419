@@ -32,24 +32,24 @@ export default function BuscarPets({ onSearch }: BuscarPetsProps) {
   };
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-2 sm:gap-4 items-center w-full sm:w-auto">
       <div className="flex-1 relative">
-        <i className="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10" />
+        <i className="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10 text-sm" />
         <InputText
           placeholder="Buscar por nome..."
           value={searchTerm}
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
-          className="pl-10 h-11"
+          className="pl-9 sm:pl-10 h-10 sm:h-11 text-sm sm:text-base"
         />
       </div>
       <Button 
         variant="primary"
         onClick={handleSearchClick}
-        className="px-6 h-11"
+        className="px-4 sm:px-6 h-10 sm:h-11 text-sm sm:text-base"
       >
-        <i className="pi pi-search mr-2" />
-        Buscar
+        <i className="pi pi-search sm:mr-2" />
+        <span className="hidden sm:inline">Buscar</span>
       </Button>
     </div>
   );

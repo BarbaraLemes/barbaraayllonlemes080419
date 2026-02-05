@@ -53,28 +53,28 @@ export default function PetDetail() {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Botão voltar */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Button
             icon="pi pi-arrow-left"
             onClick={() => navigate("/pets")}
             variant="ghost"
-            className="text-slate-600 hover:text-slate-900"
+            className="text-slate-600 hover:text-slate-900 text-xs sm:text-sm md:text-base"
           >
             Voltar para lista de pets
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-4 sm:mt-6">
           {/* Foto do pet fixada */}
           <div className="lg:col-span-1">
             <ImagePetDetail imageUrl={pet.foto?.url} nome={pet.nome} />
           </div>
 
           {/* Informações */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             <InfoPetDetail
               idade={pet.idade}
               raca={pet.raca}

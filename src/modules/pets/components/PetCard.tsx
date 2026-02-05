@@ -26,7 +26,7 @@ export default function PetCard({
       className="overflow-hidden transition-all duration-200 hover:scale-[1.02]"
       onClick={() => onClick(id)}
     >
-      <div className="w-full h-48 bg-slate-200 flex items-center justify-center pointer-events-none">
+      <div className="w-full h-40 sm:h-48 bg-slate-200 flex items-center justify-center pointer-events-none">
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -34,11 +34,11 @@ export default function PetCard({
             className="w-full h-full object-cover"
           />
         ) : (
-          <i className="pi pi-image text-slate-400 text-6xl" />
+          <i className="pi pi-image text-slate-400 text-4xl sm:text-6xl" />
         )}
       </div>
 
-      <div className="p-4 pointer-events-none">
+      <div className="p-3 sm:p-4 pointer-events-none">
         <Text as="h3" variant="heading-lg" className="text-slate-800 mb-3">
           {nome}
         </Text>

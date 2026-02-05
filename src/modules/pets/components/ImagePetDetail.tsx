@@ -5,8 +5,8 @@ interface ImagePetDetailProps {
 
 export default function ImagePetDetail({ imageUrl, nome }: ImagePetDetailProps) {
   return (
-    <div className="sticky top-24">
-      <div className="w-80 h-80 mx-auto bg-slate-200 rounded-lg overflow-hidden shadow-lg flex items-center justify-center mb-4 relative">
+    <div className="lg:sticky lg:top-24">
+      <div className="w-full sm:w-80 h-64 sm:h-80 mx-auto bg-slate-200 rounded-lg overflow-hidden shadow-lg flex items-center justify-center mb-4 relative">
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -15,10 +15,10 @@ export default function ImagePetDetail({ imageUrl, nome }: ImagePetDetailProps) 
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <i className="pi pi-image text-slate-400 text-6xl" />
+            <i className="pi pi-image text-slate-400 text-4xl sm:text-6xl" />
           </div>
         )}
-        <div className="absolute bottom-0 left-0 right-0 bg-yellow-400 text-slate-900 font-bold text-center py-3">
+        <div className="absolute bottom-0 left-0 right-0 bg-yellow-400 text-slate-900 font-bold text-center py-2 sm:py-3 text-sm sm:text-base">
           {nome}
         </div>
       </div>
