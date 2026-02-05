@@ -1,4 +1,4 @@
-import { Dialog } from "primereact/dialog";
+import Modal from "./Modal";
 import Button from "./Button";
 import Text from "./Text";
 
@@ -42,51 +42,45 @@ export default function ConfirmDialog({
   };
 
   return (
-    <Dialog
+    <Modal
       visible={visible}
       onHide={onHide}
-      header={
-        <Text variant="heading-lg" className="flex items-center gap-2">
-          {title}
-        </Text>
-      }
-      modal
-      draggable={false}
-      className="w-[90vw] max-w-md"
-      headerClassName="bg-slate-900 text-white px-6 py-4"
-      contentClassName="p-6"
+      title={title}
+      width="500px"
     >
-      <div className="flex items-start gap-4 mb-6">
-        <div className="flex-shrink-0">
-          <i className={`pi ${getIcon()} text-3xl`} />
+      <div className="p-4 sm:p-6 max-h-[60vh] sm:max-h-none overflow-y-auto">
+        <div className="flex items-start gap-4 mb-6">
+          <div className="flex-shrink-0">
+            <i className={`pi ${getIcon()} text-3xl`} />
+          </div>
+          <div className="flex-1">
+            <Text variant="body-base" className="text-slate-700">
+              {message}
+            </Text>
+          </div>
         </div>
-        <div className="flex-1">
-          <Text variant="body-base" className="text-slate-700">
-            {message}
-          </Text>
-        </div>
-      </div>
 
-      <div className="flex gap-3 justify-end">
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={onHide}
-          className="px-6 text-xs sm:text-sm md:text-base"
-          icon="pi pi-times"
-        >
-          {cancelLabel}
-        </Button>
-        <Button
-          type="button"
-          variant={severity === "danger" ? "danger" : "warning"}
-          onClick={handleConfirm}
-          className="px-6 text-xs sm:text-sm md:text-base"
-          icon="pi pi-trash"
-        >
-          {confirmLabel}
-        </Button>
+        <div className="flex gap-3 justify-end">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={onHide}
+            className="px-6 text-xs sm:text-sm md:text-base"
+            icon="pi pi-times"
+          >
+            {cancelLabel}
+          </Button>
+          <Button
+            type="button"
+            variant={severity === "danger" ? "danger" : "warning"}
+            onClick={handleConfirm}
+            className="px-6 text-xs sm:text-sm md:text-base"
+            icon="pi pi-trash"
+          >
+            {confirmLabel}
+          </Button>
+        </div>
       </div>
-    </Dialog>
+    </Modal>
   );
 }
