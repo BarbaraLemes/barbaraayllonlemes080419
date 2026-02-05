@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import type { LoginRequest, LoginResponse } from '../types/auth.types';
 
 // Mock do módulo api
-vi.mock('./api', () => ({
+vi.mock('../services/api', () => ({
   api: {
     post: vi.fn(),
     put: vi.fn(),
