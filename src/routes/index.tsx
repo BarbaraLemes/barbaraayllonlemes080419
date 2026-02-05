@@ -5,9 +5,9 @@ import AppLayout from "../layouts/AppLayout";
 
 // Lazy loading das páginas
 const Login = lazy(() => import("../modules/auth/pages/Login"));
-const PetList = lazy(() => import("../modules/pets/pages/PetList"));
-const PetDetail = lazy(() => import("../modules/pets/pages/PetDetail"));
-const PetForm = lazy(() => import("../modules/pets/pages/PetForm"));
+const PetList = lazy(() => import("../modules/pets/pages/PetList/PetList"));
+const PetDetail = lazy(() => import("../modules/pets/pages/PetDetail/PetDetail"));
+const PetForm = lazy(() => import("../modules/pets/pages/PetForm/PetForm"));
 const TutorList = lazy(() => import("../modules/tutores/pages/TutorList"));
 const TutorDetail = lazy(() => import("../modules/tutores/pages/TutorDetail"));
 const TutorForm = lazy(() => import("../modules/tutores/pages/TutorForm"));

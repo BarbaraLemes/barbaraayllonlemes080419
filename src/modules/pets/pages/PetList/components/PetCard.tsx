@@ -1,5 +1,5 @@
-import Card from "../../../components/Card";
-import Text from "../../../components/Text";
+import Card from "../../../../../components/Card";
+import Text from "../../../../../components/Text";
 
 interface PetCardProps {
   id: number;

@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { usePetDetail } from "../hooks/usePetDetail";
-import { petsService } from "../services/pets.service";
-import { useToast } from "../../../contexts/ToastContext";
-import Text from "../../../components/Text";
-import Button from "../../../components/Button";
-import ConfirmDialog from "../../../components/ConfirmDialog";
-import ImagePetDetail from "../components/ImagePetDetail";
-import InfoPetDetail from "../components/InfoPetDetail";
-import PetTutorInfo from "../components/PetTutorInfo";
-import Card from "../../../components/Card";
+import { usePetDetail } from "../../hooks/usePetDetail";
+import { petsService } from "../../services/pets.service";
+import { useToast } from "../../../../contexts/ToastContext";
+import Text from "../../../../components/Text";
+import Button from "../../../../components/Button";
+import ConfirmDialog from "../../../../components/ConfirmDialog";
+import ImagePetDetail from "./components/ImagePetDetail";
+import InfoPetDetail from "./components/InfoPetDetail";
+import PetTutorInfo from "./components/PetTutorInfo";
+import Card from "../../../../components/Card";
 
 export default function PetDetail() {
   const { id } = useParams<{ id: string }>();

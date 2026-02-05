@@ -1,6 +1,6 @@
-import Card from "../../../components/Card";
-import Text from "../../../components/Text";
-import type { Tutor } from "../../tutores/types/tutores.types";
+import Card from "../../../../../components/Card";
+import Text from "../../../../../components/Text";
+import type { Tutor } from "../../../../tutores/types/tutores.types";
 
 interface PetTutorInfoProps {
   tutores: Tutor[];

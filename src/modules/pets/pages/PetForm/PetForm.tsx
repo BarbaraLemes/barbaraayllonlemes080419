@@ -4,14 +4,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FileUpload } from "primereact/fileupload";
-import Text from "../../../components/Text";
-import Button from "../../../components/Button";
-import Card from "../../../components/Card";
-import InputText from "../../../components/InputText";
-import ConfirmDialog from "../../../components/ConfirmDialog";
-import { petsService } from "../services/pets.service";
-import type { PetRequest } from "../types/pets.types";
-import { useToast } from "../../../contexts/ToastContext";
+import Text from "../../../../components/Text";
+import Button from "../../../../components/Button";
+import Card from "../../../../components/Card";
+import InputText from "../../../../components/InputText";
+import ConfirmDialog from "../../../../components/ConfirmDialog";
+import { petsService } from "../../services/pets.service";
+import type { PetRequest } from "../../types/pets.types";
+import { useToast } from "../../../../contexts/ToastContext";
 
 // Schema de validação com Zod
 const petFormSchema = z.object({
