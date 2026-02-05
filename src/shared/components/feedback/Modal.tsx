@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { Dialog } from "primereact/dialog";
-import Text from "./Text";
+import Text from "../ui/Text";
 
 interface ModalProps {
   visible: boolean;

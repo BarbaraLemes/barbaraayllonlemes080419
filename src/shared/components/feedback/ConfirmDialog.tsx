@@ -1,6 +1,6 @@
 import Modal from "./Modal";
-import Button from "./Button";
-import Text from "./Text";
+import Button from "../ui/Button";
+import Text from "../ui/Text";
 
 interface ConfirmDialogProps {
   visible: boolean;

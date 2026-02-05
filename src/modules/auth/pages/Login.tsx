@@ -3,10 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Button from "../../../components/Button";
-import InputText from "../../../components/InputText";
-import Text from "../../../components/Text";
-import Card from "../../../components/Card";
+import Button from "../../../shared/components/ui/Button";
+import InputText from "../../../shared/components/ui/InputText";
+import Text from "../../../shared/components/ui/Text";
+import Card from "../../../shared/components/ui/Card";
 import { useAuth } from "../hooks/useAuth";
 import { useToast } from "../../../contexts/ToastContext";
 

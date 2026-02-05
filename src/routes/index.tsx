@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../shared/components/navigation/ProtectedRoute";
 import AppLayout from "../layouts/AppLayout";
 
 // Lazy loading das páginas

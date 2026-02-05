@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Card from "../../../../../components/Card";
-import Text from "../../../../../components/Text";
-import Button from "../../../../../components/Button";
-import ConfirmDialog from "../../../../../components/ConfirmDialog";
+import Card from "../../../../../shared/components/ui/Card";
+import Text from "../../../../../shared/components/ui/Text";
+import Button from "../../../../../shared/components/ui/Button";
+import ConfirmDialog from "../../../../../shared/components/feedback/ConfirmDialog";
 import VincularPetModal from "./VincularPetModal";
 import { useToast } from "../../../../../contexts/ToastContext";
 import { petsService } from "../../../../pets/services/pets.service";

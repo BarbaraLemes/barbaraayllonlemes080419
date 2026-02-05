@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../modules/auth/hooks/useAuth";
-import Button from "./Button";
-import Text from "./Text";
+import { useAuth } from "../../../modules/auth/hooks/useAuth";
+import Button from "../ui/Button";
+import Text from "../ui/Text";
 
 export default function Header() {
   const navigate = useNavigate();

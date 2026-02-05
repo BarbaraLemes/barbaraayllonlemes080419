@@ -1,5 +1,5 @@
-import Card from "../../../../../components/Card";
-import Text from "../../../../../components/Text";
+import Card from "../../../../../shared/components/ui/Card";
+import Text from "../../../../../shared/components/ui/Text";
 
 interface ImageTutorDetailProps {
   imageUrl?: string;

@@ -1,6 +1,6 @@
-import Text from "../../../../../components/Text";
-import Card from "../../../../../components/Card";
-import Button from "../../../../../components/Button";
+import Text from "../../../../../shared/components/ui/Text";
+import Card from "../../../../../shared/components/ui/Card";
+import Button from "../../../../../shared/components/ui/Button";
 
 interface InfoTutorDetailProps {
   nome: string;

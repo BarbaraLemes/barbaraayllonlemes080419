@@ -3,13 +3,13 @@ import { useState } from "react";
 import { usePetDetail } from "../../hooks/usePetDetail";
 import { petsService } from "../../services/pets.service";
 import { useToast } from "../../../../contexts/ToastContext";
-import Text from "../../../../components/Text";
-import Button from "../../../../components/Button";
-import ConfirmDialog from "../../../../components/ConfirmDialog";
+import Text from "../../../../shared/components/ui/Text";
+import Button from "../../../../shared/components/ui/Button";
+import ConfirmDialog from "../../../../shared/components/feedback/ConfirmDialog";
 import ImagePetDetail from "./components/ImagePetDetail";
 import InfoPetDetail from "./components/InfoPetDetail";
 import PetTutorInfo from "./components/PetTutorInfo";
-import Card from "../../../../components/Card";
+import Card from "../../../../shared/components/ui/Card";
 
 export default function PetDetail() {
   const { id } = useParams<{ id: string }>();

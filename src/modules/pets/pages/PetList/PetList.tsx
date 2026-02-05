@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Paginator } from "primereact/paginator";
-import Text from "../../../../components/Text";
+import Text from "../../../../shared/components/ui/Text";
 import { usePets } from "../../hooks/usePets";
 import PetCard from "./components/PetCard";
 import BuscarPets from "./components/BuscarPets";
-import Button from "../../../../components/Button";
+import Button from "../../../../shared/components/ui/Button";
 
 export default function PetList() {
   const navigate = useNavigate();
