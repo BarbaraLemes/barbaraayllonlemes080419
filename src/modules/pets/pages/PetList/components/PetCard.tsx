@@ -39,16 +39,16 @@ export default function PetCard({
       </div>
 
       <div className="p-3 sm:p-4 pointer-events-none">
-        <Text as="h3" variant="heading-lg" className="text-slate-800 mb-3">
+        <Text as="h3" variant="heading-lg" className="text-slate-900 mb-3">
           {nome}
         </Text>
 
         <div className="flex flex-col gap-2">
           <Text variant="body-sm" className="text-slate-600">
-            Espécie: {raca}
+            <strong className="font-semibold">Raça:</strong> {raca}
           </Text>
           <Text variant="body-sm" className="text-slate-600">
-            Idade: {idade ? `${idade} ${idade === 1 ? "ano" : "anos"}` : ""}
+            <strong className="font-semibold">Idade:</strong> {idade ? `${idade} ${idade === 1 ? "ano" : "anos"}` : ""}
           </Text>
         </div>
       </div>
