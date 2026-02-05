@@ -97,22 +97,25 @@ export default function PetList() {
                   onPageChange={handlePageChange}
                   template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                   pt={{
+                    root: {
+                      className: "bg-transparent border-0"
+                    },
                     firstPageButton: {
-                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                      className: "hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
                     prevPageButton: {
-                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                      className: "hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
                     nextPageButton: {
-                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                      className: "hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
                     lastPageButton: {
-                      className: "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1"
+                      className: "hover:bg-slate-100 text-slate-700 rounded-full mx-1"
                     },
                     pageButton: (options: any) => ({
                       className: options.context.active
                         ? "bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-semibold rounded-full mx-1"
-                        : "bg-white hover:bg-slate-100 text-slate-700 rounded-full mx-1",
+                        : "hover:bg-slate-100 text-slate-700 rounded-full mx-1",
                     }),
                   }}
                 />
