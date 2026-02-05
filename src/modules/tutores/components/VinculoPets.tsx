@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button";
-import InputText from "../../../components/InputText";
 import ConfirmDialog from "../../../components/ConfirmDialog";
+import VincularPetModal from "./VincularPetModal";
 import { useToast } from "../../../contexts/ToastContext";
 import { petsService } from "../../pets/services/pets.service";
 import { tutoresService } from "../services/tutores.service";
@@ -23,8 +23,7 @@ export default function VinculoPets({
   const { showToast } = useToast();
   const [petsDisponiveis, setPetsDisponiveis] = useState<Pet[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showSelector, setShowSelector] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [showVincularModal, setShowVincularModal] = useState(false);
   const [showDesvincularDialog, setShowDesvincularDialog] = useState(false);
   const [petToDesvincular, setPetToDesvincular] = useState<Pet | null>(null);
 
@@ -45,17 +44,16 @@ export default function VinculoPets({
   };
 
   useEffect(() => {
-    if (showSelector) {
+    if (showVincularModal) {
       loadPetsDisponiveis();
     }
-  }, [showSelector, petsVinculados]);
+  }, [showVincularModal, petsVinculados]);
 
   const handleVincular = async (petId: number) => {
     try {
       await tutoresService.vincularPetTutor(tutorId, petId);
       showToast("success", "Sucesso", "Pet vinculado com sucesso!");
-      setShowSelector(false);
-      setSearchTerm("");
+      setShowVincularModal(false);
       onVinculoChange();
     } catch (error) {
       console.error("Erro ao vincular pet:", error);
@@ -101,7 +99,7 @@ export default function VinculoPets({
           </div>
           <Button
             variant="primary"
-            onClick={() => setShowSelector(!showSelector)}
+            onClick={() => setShowVincularModal(true)}
             className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border-none text-xs sm:text-sm md:text-base"
           >
             <i className="pi pi-plus" />
@@ -111,102 +109,6 @@ export default function VinculoPets({
       </div>
 
       <div className="p-6">
-        {/* Seletor de pets disponíveis */}
-        {showSelector && (
-          <Card
-            variant="default"
-            padding="md"
-            className="mb-6 border-2 border-yellow-400"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <Text variant="heading-lg" className="text-slate-900">
-                Selecione um pet disponível
-              </Text>
-              <Button
-              variant="ghost"
-              icon="pi pi-times"
-                onClick={() => {
-                  setShowSelector(false);
-                  setSearchTerm("");
-                }}
-                className="text-slate-600 hover:text-slate-900 text-xs sm:text-sm md:text-base"
-              />
-            </div>
-
-            {/* Input de pesquisa */}
-            <div className="mb-4">
-              <InputText
-                placeholder="Pesquisar por nome ou raça..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full"
-              />
-            </div>
-
-            {isLoading ? (
-              <div className="text-center py-4">
-                <i className="pi pi-spin pi-spinner text-slate-400 text-2xl" />
-              </div>
-            ) : (() => {
-                const petsFiltrados = petsDisponiveis.filter((pet) =>
-                  pet.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  pet.raca?.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-
-                return petsFiltrados.length === 0 ? (
-                  <Text
-                    variant="body-sm"
-                    className="text-slate-600 text-center py-4"
-                  >
-                    {searchTerm ? "Nenhum pet encontrado com esse critério" : "Nenhum pet disponível para vincular"}
-                  </Text>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {petsFiltrados.map((pet) => (
-                  <div
-                    key={pet.id}
-                    className="flex items-center justify-between p-4 bg-white rounded-lg border border-slate-200 hover:border-yellow-400 transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      {pet.foto?.url ? (
-                        <img
-                          src={pet.foto.url}
-                          alt={pet.nome}
-                          className="w-12 h-12 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center">
-                          <i className="pi pi-heart text-slate-400 text-xl" />
-                        </div>
-                      )}
-                      <div className=" flex flex-col">
-                        <Text
-                          variant="body-base"
-                          className="text-slate-900 font-semibold mb-0.5"
-                        >
-                          {pet.nome}
-                        </Text>
-                        <Text variant="body-sm" className="text-slate-500">
-                          {pet.raca} • {pet.idade}{" "}
-                          {pet.idade === 1 ? "ano" : "anos"}
-                        </Text>
-                      </div>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      icon="pi pi-plus"
-                      onClick={() => handleVincular(pet.id)}
-                      className="text-yellow-400 hover:text-yellow-600 hover:bg-transparent transition-colors"
-                      tooltip="Vincular Pet"
-                    />
-                  </div>
-                ))}
-              </div>
-            );
-          })()}
-          </Card>
-        )}
-
         {/* Lista de pets vinculados */}
         {petsVinculados.length === 0 ? (
           <div className="text-center py-8 bg-slate-50 rounded-lg border-2 border-dashed border-slate-200 flex flex-col">
@@ -277,6 +179,16 @@ export default function VinculoPets({
         )}
       </div>
 
+      {/* Modal de Vincular Pet */}
+      <VincularPetModal
+        visible={showVincularModal}
+        onHide={() => setShowVincularModal(false)}
+        petsDisponiveis={petsDisponiveis}
+        isLoading={isLoading}
+        onVincular={handleVincular}
+      />
+
+      {/* Dialog de Confirmação de Desvincular */}
       <ConfirmDialog
         visible={showDesvincularDialog}
         onHide={() => {
