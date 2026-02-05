@@ -242,7 +242,7 @@ Para validar se está tudo funcionando corretamente, siga este roteiro:
 
 ### 🐾 Módulo Pets (Rotas Protegidas)
 
-**Listagem** - `/`
+**Listagem** - `/pets`
 - Paginação de 10 itens por página com navegação completa
 - Busca por nome com filtro dinâmico em tempo real
 - Cards responsivos com foto, nome, raça e idade
