@@ -40,10 +40,10 @@ export default function TutorCard({
       className="overflow-hidden relative shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
       onClick={handleClick}
     >
-      <div className="p-6 pointer-events-none">
-        <div className="flex items-start gap-4 mb-4">
+      <div className="p-4 sm:p-6 pointer-events-none">
+        <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
           <div className="flex-shrink-0">
-            <div className="w-24 h-24 rounded-full border-4 border-yellow-100 bg-slate-200 flex items-center justify-center overflow-hidden">
+            <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-4 border-yellow-100 bg-slate-200 flex items-center justify-center overflow-hidden">
               {imageUrl ? (
                 <img
                   src={imageUrl}
@@ -51,12 +51,12 @@ export default function TutorCard({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <i className="pi pi-user text-slate-400 text-4xl" />
+                <i className="pi pi-user text-slate-400 text-2xl sm:text-4xl" />
               )}
             </div>
           </div>
 
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-1 sm:space-y-2">
             <Text variant="heading-lg" className="text-slate-900 font-semibold">
               {nome}
             </Text>

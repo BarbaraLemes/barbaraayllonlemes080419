@@ -32,9 +32,9 @@ export default function TutorList() {
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-3 sm:p-6">
       <div className="max-w-[95%] mx-auto">
-        <div className="mb-8">
+        <div className="mb-4 sm:mb-8">
           <Text as="h1" variant="heading-2xl" className="text-slate-800 mb-2">
             Tutores Cadastrados
           </Text>
@@ -43,12 +43,12 @@ export default function TutorList() {
           </Text>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-4 sm:mb-8 gap-3 sm:gap-4">
           <Button
             variant="warning"
             onClick={handleNewTutor}
             icon="pi-plus"
-            className="h-11 px-5"
+            className="h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
           >
             Novo Tutor
           </Button>
@@ -57,12 +57,12 @@ export default function TutorList() {
         </div>
 
         {isLoading ? (
-          <div className="text-center py-12">
-            <i className="pi pi-spin pi-spinner text-slate-400 text-4xl" />
+          <div className="text-center py-8 sm:py-12">
+            <i className="pi pi-spin pi-spinner text-slate-400 text-3xl sm:text-4xl" />
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {tutores.map((tutor) => (
                 <TutorCard
                   key={tutor.id}

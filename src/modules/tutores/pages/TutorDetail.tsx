@@ -52,9 +52,9 @@ export default function TutorDetail() {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Button
             icon="pi pi-arrow-left"
             onClick={() => navigate("/tutores")}
@@ -65,7 +65,7 @@ export default function TutorDetail() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-4 sm:mt-6">
           {/* Foto do tutor fixada */}
           <div className="lg:col-span-1">
             <ImageTutorDetail
@@ -76,7 +76,7 @@ export default function TutorDetail() {
           </div>
 
           {/* Informações */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             <InfoTutorDetail
               nome={tutor.nome}
               telefone={tutor.telefone}

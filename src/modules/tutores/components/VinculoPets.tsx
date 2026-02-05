@@ -80,11 +80,11 @@ export default function VinculoPets({
       padding="none"
       className="shadow-lg overflow-hidden"
     >
-      <div className="bg-yellow-400 px-6 py-5">
-        <div className="flex items-center justify-between">
+      <div className="bg-yellow-400 px-4 sm:px-6 py-4 sm:py-5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-3 sm:gap-0">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <i className="pi pi-link text-slate-900 text-xl" />
+            <div className="flex items-center gap-2 mb-1 sm:mb-2">
+              <i className="pi pi-link text-slate-900 text-lg sm:text-xl" />
               <Text
                 as="h2"
                 variant="heading-lg"
@@ -100,7 +100,7 @@ export default function VinculoPets({
           <Button
             variant="primary"
             onClick={() => setShowVincularModal(true)}
-            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border-none text-xs sm:text-sm md:text-base"
+            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border-none text-xs sm:text-sm md:text-base w-full sm:w-auto justify-center"
           >
             <i className="pi pi-plus" />
             Vincular Pet
@@ -108,17 +108,17 @@ export default function VinculoPets({
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         {/* Lista de pets vinculados */}
         {petsVinculados.length === 0 ? (
-          <div className="text-center py-8 bg-slate-50 rounded-lg border-2 border-dashed border-slate-200 flex flex-col">
-            <i className="pi pi-inbox text-slate-300 text-5xl mb-3" />
+          <div className="text-center py-6 sm:py-8 bg-slate-50 rounded-lg border-2 border-dashed border-slate-200 flex flex-col">
+            <i className="pi pi-inbox text-slate-300 text-4xl sm:text-5xl mb-2 sm:mb-3" />
             <Text variant="body-base" className="text-slate-600">
               Nenhum pet vinculado
             </Text>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {petsVinculados.map((pet) => (
               <Card
                 key={pet.id}
@@ -126,32 +126,32 @@ export default function VinculoPets({
                 padding="md"
                 className="shadow-md"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                     {/* Foto do Pet */}
                     {pet.foto?.url ? (
                       <img
                         src={pet.foto.url}
                         alt={pet.nome}
-                        className="w-16 h-16 rounded-full object-cover border-2 border-slate-400"
+                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-slate-400 flex-shrink-0"
                       />
                     ) : (
-                      <div className="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-400">
-                        <i className="pi pi-heart text-slate-600 text-xl" />
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-400 flex-shrink-0">
+                        <i className="pi pi-heart text-slate-600 text-lg sm:text-xl" />
                       </div>
                     )}
 
                     {/* Informações do Pet */}
-                    <div className="space-y-1">
+                    <div className="space-y-0.5 sm:space-y-1 flex-1 min-w-0">
                       <Text
                         variant="heading-lg"
-                        className="text-slate-900 font-semibold"
+                        className="text-slate-900 font-semibold truncate"
                       >
                         {pet.nome}
                       </Text>
                       <div className="flex items-center gap-3 text-slate-600">
                         <div className="flex items-center gap-1">
-                          <Text variant="body-sm" className="text-slate-600">
+                          <Text variant="body-sm" className="text-slate-600 truncate">
                             {pet.raca} • {pet.idade}{" "}
                             {pet.idade === 1 ? "ano" : "anos"}
                           </Text>
@@ -168,7 +168,7 @@ export default function VinculoPets({
                       setPetToDesvincular(pet);
                       setShowDesvincularDialog(true);
                     }}
-                    className="text-red-500 hover:text-red-600 hover:bg-transparent transition-colors"
+                    className="text-red-500 hover:text-red-600 hover:bg-transparent transition-colors flex-shrink-0 text-sm sm:text-base"
                     tooltip="Desvincular Pet"
                     tooltipOptions={{ position: "top" }}
                   />

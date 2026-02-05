@@ -187,10 +187,10 @@ export default function TutorForm() {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
 
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Button
             icon="pi pi-arrow-left"
             onClick={() => navigate(isEditing ? `/tutores/${id}` : "/tutores")}
@@ -201,19 +201,19 @@ export default function TutorForm() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-4 sm:gap-6 mt-4">
           {/* Foto do Tutor */}
           <div className="space-y-0">
             <Card variant="default" padding="none" className="shadow-xl border-none overflow-hidden h-fit">
-              <div className="bg-slate-900 text-white px-5 py-4 flex items-center gap-2">
-                <i className="pi pi-user text-sm" />
+              <div className="bg-slate-900 text-white px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-2">
+                <i className="pi pi-user text-xs sm:text-sm" />
                 <Text variant="body-sm" className="font-medium text-white">
                   Foto do Tutor
                 </Text>
               </div>
 
               {/* Área de Preview da Foto */}
-              <div className="bg-slate-100 p-6 flex items-center justify-center relative">
+              <div className="bg-slate-100 p-4 sm:p-6 flex items-center justify-center relative">
                 {previewUrl || currentFoto ? (
                   <div className="w-full aspect-square rounded-md overflow-hidden relative">
                     <img
@@ -240,8 +240,8 @@ export default function TutorForm() {
               </div>
 
               {/* Área de Upload */}
-              <div className="px-6 pb-4 pt-4">
-                <div className="border-2 border-dashed border-slate-300 rounded-md py-3 px-3 text-center bg-white">
+              <div className="px-4 sm:px-6 pb-3 sm:pb-4 pt-3 sm:pt-4">
+                <div className="border-2 border-dashed border-slate-300 rounded-md py-2 sm:py-3 px-2 sm:px-3 text-center bg-white">
                   <i className="pi pi-upload text-slate-400 text-lg mb-1 block" />
                   <FileUpload
                     ref={fileUploadRef}
@@ -273,8 +273,8 @@ export default function TutorForm() {
 
           {/* Formulário */}
           <Card variant="default" padding="none" className="shadow-xl border-none h-fit">
-            <div className="bg-slate-900 text-white px-8 py-6 rounded-t-lg">
-              <Text as="h1" variant="heading-xl" className="text-white mb-2">
+            <div className="bg-slate-900 text-white px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-t-lg">
+              <Text as="h1" variant="heading-xl" className="text-white mb-1 sm:mb-2">
                 {isEditing ? "Editar Tutor" : "Cadastrar Novo Tutor"}
               </Text>
               <Text variant="body-base" className="text-slate-300">
@@ -282,7 +282,7 @@ export default function TutorForm() {
               </Text>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
               <InputText
                 label="Nome Completo"
                 placeholder="Digite o nome completo"
@@ -345,13 +345,13 @@ export default function TutorForm() {
                 />
               </div>
 
-              <hr className="my-6" />
+              <hr className="my-4 sm:my-6" />
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button
                   type="submit"
                   variant="warning"
-                  className="flex-1 text-xs sm:text-sm md:text-base"
+                  className="flex-1 h-11 sm:h-12 text-sm sm:text-base px-6"
                   isLoading={isSubmitting}
                   disabled={isSubmitting}
                 >
@@ -362,7 +362,7 @@ export default function TutorForm() {
                   variant="cancel"
                   onClick={handleCancel}
                   disabled={isSubmitting}
-                  className="flex-1 text-xs sm:text-sm md:text-base"
+                  className="flex-1 h-11 sm:h-12 text-sm sm:text-base px-6"
                 >
                   Cancelar
                 </Button>
