@@ -5,3 +5,13 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+
+  test:
+    build:
+      context: .
+      target: build
+    working_dir: /app
+    command: npm test
+    volumes:
+      - .:/app
+      - /app/node_modules

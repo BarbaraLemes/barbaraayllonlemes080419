@@ -173,21 +173,22 @@ docker-compose down
 
 ## 🧪 Como Executar Testes
 
-Os testes podem ser executados diretamente dentro do container Docker:
+Os testes são executados via Docker Compose usando um serviço dedicado:
 
 ```bash
-# Certifique-se que o container está rodando
-docker ps
-
 # Execute os testes unitários
-docker exec -it barbaraayllonlemes080419-app-1 npm test
+docker-compose run --rm test
 
 # Execute os testes com relatório de cobertura
-docker exec -it barbaraayllonlemes080419-app-1 npm run test:coverage
+docker-compose run --rm test npm run test:coverage
 
 # Execute os testes com interface visual (Vitest UI)
-docker exec -it barbaraayllonlemes080419-app-1 npm run test:ui
+docker-compose run --rm -p 51204:51204 test npm run test:ui
 ```
+
+**ℹ️ Sobre os comandos:**
+- `--rm`: Remove o container automaticamente após a execução
+- `-p 51204:51204`: Expõe a porta do Vitest UI (apenas para test:ui)
 
 **📊 Cobertura Atual: 82% - 120 testes passando**
 
